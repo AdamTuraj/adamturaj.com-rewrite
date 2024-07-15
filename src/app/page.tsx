@@ -5,7 +5,7 @@ const HomePage = () => {
   return (
     <>
       <ThreeCanvas />
-      <SplashScreen />
+      {/* <SplashScreen /> */}
     </>
   );
 };

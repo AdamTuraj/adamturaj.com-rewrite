@@ -9,6 +9,9 @@
 !.yarn/sdks
 !.yarn/versions
 
+# Models are too big for github
+Models/
+
 # testing
 /coverage
 

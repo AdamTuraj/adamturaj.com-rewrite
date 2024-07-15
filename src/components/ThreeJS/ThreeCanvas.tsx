@@ -1,16 +1,21 @@
 "use client";
 
-import PCBModel from "./PCBModel";
+import Scene from "./Scene";
+import Background from "./Background";
 
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import {
-  OrbitControls,
+  AdaptiveDpr,
   ScrollControls,
-  Stage,
   useProgress,
-  useScroll,
+  Preload,
+  PerformanceMonitor,
+  PerspectiveCamera,
+  Stats,
+  OrbitControls
+  
 } from "@react-three/drei";
 
 const Loader = () => {
@@ -26,19 +31,32 @@ const Loader = () => {
 };
 
 const ThreeCanvas = () => {
+  const [dpr, setDpr] = useState(1.5)
+
   return (
     <Suspense fallback={<Loader />}>
       <Canvas
         shadows
         style={{ width: "100vw", height: "100vh" }}
-        className="blur-[2px]"
-        camera={{ zoom: 150 }}
+        // className="blur-[2px]"
+        // camera={{position: [-1.41669, -0.009903, 0.274369], rotation: [1, -45, -0.94]}}
+        dpr={dpr}
       >
         <color attach="background" args={["#fff"]} />
         <ambientLight intensity={1.2} />
+        <AdaptiveDpr pixelated />
+        <PerspectiveCamera makeDefault position={[-0.35773433178572334, 0.12123904332118751, 0.05623705731566958]} rotation={[-0.6548807824899788, -1.3727113665847221, -0.645365890277982]} zoom={0.8} />
+
+        <Background />
+
+        <Preload all />
+
+        <Stats showPanel={0} className="stats" />
+
+        <PerformanceMonitor onIncline={() => setDpr(2)} onDecline={() => setDpr(1)} />
 
         <ScrollControls pages={5}>
-          <PCBModel />
+          <Scene />
         </ScrollControls>
       </Canvas>
     </Suspense>
