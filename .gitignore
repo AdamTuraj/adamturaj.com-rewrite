@@ -40,3 +40,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# STM32CubeIDE
+.metadata
+.settings
+[Rr]elease
+[Dd]ebug
+.launch
+Drivers
+.cproject
+
+Portfolio Example Debug.launch
+.project
