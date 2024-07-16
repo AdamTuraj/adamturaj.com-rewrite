@@ -38,13 +38,12 @@ const ThreeCanvas = () => {
         shadows
         style={{ width: "100vw", height: "100vh" }}
         // className="blur-[2px]"
-        // camera={{position: [-1.41669, -0.009903, 0.274369], rotation: [1, -45, -0.94]}}
         dpr={dpr}
       >
         <color attach="background" args={["#fff"]} />
         <ambientLight intensity={1.2} />
         <AdaptiveDpr pixelated />
-        {/* <PerspectiveCamera
+        <PerspectiveCamera
           makeDefault
           position={[
             -0.35773433178572334, 0.12123904332118751, 0.05623705731566958,
@@ -53,8 +52,8 @@ const ThreeCanvas = () => {
             -0.6548807824899788, -1.3727113665847221, -0.645365890277982,
           ]}
           zoom={0.8}
-        /> */}
-        <OrbitControls makeDefault />
+        />
+        {/* <OrbitControls makeDefault /> */}
 
         <Background />
 

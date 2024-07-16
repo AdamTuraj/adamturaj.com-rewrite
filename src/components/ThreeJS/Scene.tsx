@@ -8,6 +8,8 @@ import * as THREE from "three";
 import { Plane, useGLTF, useTexture, useVideoTexture } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
+import CuttingMat from "./CuttingMat";
+
 type GLTFResult = GLTF & {
   nodes: {
     cavo005: THREE.Mesh;
@@ -169,7 +171,6 @@ const Scene = (props: JSX.IntrinsicElements["group"]) => {
   ) as GLTFResult;
   const screenVideoTexture = useVideoTexture("/textures/computerScreen.mp4");
   const oscilloscopeTexture = useTexture("textures/OscilloscopeScreen.jpg");
-  const matTexture = useTexture("textures/cuttingMat.webp");
 
   return (
     <group {...props} dispose={null}>
@@ -574,13 +575,7 @@ const Scene = (props: JSX.IntrinsicElements["group"]) => {
         rotation={[-Math.PI, -0.611982, -Math.PI]}
         scale={[0.147105, 0.151564, 0.147854]}
       />
-      <Plane
-        args={[0.6, 1.2]}
-        rotation={[-Math.PI / 2, 0, 0]}
-        position={[0, -0.025, 0]}
-      >
-        <meshStandardMaterial map={matTexture} />
-      </Plane>
+      <CuttingMat />
     </group>
   );
 };
