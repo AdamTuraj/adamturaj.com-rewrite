@@ -45,7 +45,8 @@ const ThreeCanvas = () => {
         <color attach="background" args={["#fff"]} />
         <ambientLight intensity={1.2} />
         <AdaptiveDpr pixelated />
-        <PerspectiveCamera makeDefault position={[-0.35773433178572334, 0.12123904332118751, 0.05623705731566958]} rotation={[-0.6548807824899788, -1.3727113665847221, -0.645365890277982]} zoom={0.8} />
+        {/* <PerspectiveCamera makeDefault position={[-0.35773433178572334, 0.12123904332118751, 0.05623705731566958]} rotation={[-0.6548807824899788, -1.3727113665847221, -0.645365890277982]} zoom={0.8} /> */}
+        <OrbitControls makeDefault />
 
         <Background />
 
@@ -57,6 +58,7 @@ const ThreeCanvas = () => {
 
         <ScrollControls pages={5}>
           <Scene />
+          {/* <ComputerScreen /> */}
         </ScrollControls>
       </Canvas>
     </Suspense>
