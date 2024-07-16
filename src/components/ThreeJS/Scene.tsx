@@ -4,8 +4,8 @@ Command: npx gltfjsx@6.4.1 output2.glb --types --exportdefault --precision 6
 */
 
 import * as THREE from "three";
-import React from "react";
-import { Plane, useGLTF, useVideoTexture } from "@react-three/drei";
+
+import { Plane, useGLTF, useTexture, useVideoTexture } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
 type GLTFResult = GLTF & {
@@ -168,6 +168,8 @@ const Scene = (props: JSX.IntrinsicElements["group"]) => {
     "/models/PortfolioScene.glb"
   ) as GLTFResult;
   const screenVideoTexture = useVideoTexture("/textures/computerScreen.mp4");
+  const oscilloscopeTexture = useTexture("textures/OscilloscopeScreen.jpg");
+  const matTexture = useTexture("textures/cuttingMat.webp");
 
   return (
     <group {...props} dispose={null}>
@@ -514,7 +516,9 @@ const Scene = (props: JSX.IntrinsicElements["group"]) => {
         position={[0.087322, -0.015202, -0.000158]}
       />
       <group position={[0.087322, -0.015202, -0.000158]}>
-        <mesh geometry={nodes.Screen_1.geometry} material={materials.Screen} />
+        <mesh geometry={nodes.Screen_1.geometry}>
+          <meshStandardMaterial map={oscilloscopeTexture} toneMapped={false} />
+        </mesh>
         <mesh geometry={nodes.Screen_2.geometry} material={materials.Platine} />
       </group>
       <mesh
@@ -570,6 +574,13 @@ const Scene = (props: JSX.IntrinsicElements["group"]) => {
         rotation={[-Math.PI, -0.611982, -Math.PI]}
         scale={[0.147105, 0.151564, 0.147854]}
       />
+      <Plane
+        args={[0.6, 1.2]}
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[0, -0.025, 0]}
+      >
+        <meshStandardMaterial map={matTexture} />
+      </Plane>
     </group>
   );
 };
