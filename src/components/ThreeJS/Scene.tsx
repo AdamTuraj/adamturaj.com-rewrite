@@ -5,7 +5,7 @@ Command: npx gltfjsx@6.4.1 output2.glb --types --exportdefault --precision 6
 
 import * as THREE from "three";
 import React from "react";
-import { Plane, useGLTF } from "@react-three/drei";
+import { Plane, useGLTF, useVideoTexture } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 
 type GLTFResult = GLTF & {
@@ -167,6 +167,8 @@ const Scene = (props: JSX.IntrinsicElements["group"]) => {
   const { nodes, materials } = useGLTF(
     "/models/PortfolioScene.glb"
   ) as GLTFResult;
+  const screenVideoTexture = useVideoTexture("/textures/computerScreen.mp4");
+
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -175,14 +177,16 @@ const Scene = (props: JSX.IntrinsicElements["group"]) => {
         position={[0.087322, -0.015202, -0.000158]}
       />
       <Plane
-        args={[0.25, 0.25]}
-        position={[0.08, 0.05202, -0.33158]}
+        args={[0.3, 0.18]}
+        position={[0.11, 0.089, -0.301]}
         rotation={[
-          (-33 * Math.PI) / 180,
-          -Math.PI / 3.6,
-          (-28 * Math.PI) / 180,
+          (-32.5 * Math.PI) / 180,
+          -Math.PI / 3.58,
+          (-26.5 * Math.PI) / 180,
         ]}
-      ></Plane>
+      >
+        <meshBasicMaterial map={screenVideoTexture} toneMapped={false} />
+      </Plane>
       <group
         position={[0.087322, -0.015202, -0.000158]}
         scale={[0.145156, 0.01, 0.92]}
