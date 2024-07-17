@@ -10,7 +10,7 @@
 !.yarn/versions
 
 # Models are too big for github
-Models/
+Blender Models/
 
 # testing
 /coverage
