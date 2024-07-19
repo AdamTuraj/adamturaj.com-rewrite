@@ -122,13 +122,13 @@ const Drone = () => {
   const { nodes, materials } = useGLTF("/models/drone.glb") as GLTFResult;
   const propRef = useRef<THREE.Group[]>([]);
 
-  useFrame(() => {
-    if (propRef.current.length === 0) return;
+  // useFrame(() => {
+  //   if (propRef.current.length === 0) return;
 
-    propRef.current.forEach((prop) => {
-      prop.rotation.y += 0.5;
-    });
-  });
+  //   propRef.current.forEach((prop) => {
+  //     prop.rotation.y += 0.5;
+  //   });
+  // });
 
   return (
     <group dispose={null}>

@@ -24,15 +24,15 @@ type GLTFResult = GLTF & {
   };
 };
 
-const CuttingMat = (props: JSX.IntrinsicElements["group"]) => {
+const CuttingMat = () => {
   const { nodes, materials } = useGLTF("/models/cuttingMat.glb") as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group dispose={null}>
       <mesh
         geometry={nodes.Object_4.geometry}
         material={materials["palette.016"]}
         rotation={[Math.PI / 2, 0, Math.PI]}
-        position={[0.2, -0.028, -0.3]}
+        position={[0.2, -0.0275, -0.3]}
         scale={0.03}
       />
     </group>

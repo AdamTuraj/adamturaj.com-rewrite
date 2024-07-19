@@ -69,8 +69,8 @@ const ThreeCanvas = () => {
         />
 
         <ScrollControls pages={5}>
-          {/* <Scene /> */}
-          <Drone />
+          <Scene />
+          {/* <Drone /> */}
         </ScrollControls>
       </Canvas>
     </Suspense>
