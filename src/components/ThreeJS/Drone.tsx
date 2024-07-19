@@ -4,9 +4,10 @@ Command: npx gltfjsx@6.4.1 output.glb --types
 */
 
 import * as THREE from "three";
-import React from "react";
+import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
+import { useFrame } from "@react-three/fiber";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -119,6 +120,16 @@ type GLTFResult = GLTF & {
 
 const Drone = () => {
   const { nodes, materials } = useGLTF("/models/drone.glb") as GLTFResult;
+  const propRef = useRef<THREE.Group[]>([]);
+
+  useFrame(() => {
+    if (propRef.current.length === 0) return;
+
+    propRef.current.forEach((prop) => {
+      prop.rotation.y += 0.5;
+    });
+  });
+
   return (
     <group dispose={null}>
       {/* ESC */}
@@ -247,6 +258,8 @@ const Drone = () => {
           material={materials["Opaque(192,192,192).001"]}
         />
       </group>
+
+      {/* Frame */}
       <mesh
         geometry={nodes.Frame.geometry}
         material={materials["Carbon Fiber - Plain.001"]}
@@ -371,7 +384,14 @@ const Drone = () => {
       </group>
 
       {/* Prop 1 */}
-      <group position={[7.983, 1.78, 7.166]}>
+      <group
+        position={[7.983, 1.78, 7.166]}
+        ref={(el) => {
+          if (el) {
+            propRef.current[0] = el;
+          }
+        }}
+      >
         <mesh
           geometry={nodes.Prop_1_1.geometry}
           material={materials["Opaque(65,195,130).001"]}
@@ -383,7 +403,15 @@ const Drone = () => {
       </group>
 
       {/* Prop 2 */}
-      <group position={[-7.983, 1.78, 7.166]} rotation={[0, 0, -Math.PI]}>
+      <group
+        position={[-7.983, 1.78, 7.166]}
+        rotation={[0, 0, -Math.PI]}
+        ref={(el) => {
+          if (el) {
+            propRef.current[1] = el;
+          }
+        }}
+      >
         <mesh
           geometry={nodes.Prop_2_1.geometry}
           material={materials["Opaque(65,195,130).001"]}
@@ -395,7 +423,15 @@ const Drone = () => {
       </group>
 
       {/* Prop 3 */}
-      <group position={[7.983, 1.78, -7.166]} rotation={[Math.PI, 0, 0]}>
+      <group
+        position={[7.983, 1.78, -7.166]}
+        rotation={[Math.PI, 0, 0]}
+        ref={(el) => {
+          if (el) {
+            propRef.current[2] = el;
+          }
+        }}
+      >
         <mesh
           geometry={nodes.Prop_3_1.geometry}
           material={materials["Opaque(65,195,130).001"]}
@@ -408,16 +444,21 @@ const Drone = () => {
 
       {/* Prop 4 */}
       <group
-        position={[-7.983, 6.69, -4.902]}
-        rotation={[Math.PI, 0, Math.PI / 2]}
+        position={[-7.983, 1.78, -7.166]}
+        rotation={[0, 0, Math.PI]}
+        ref={(el) => {
+          if (el) {
+            propRef.current[3] = el;
+          }
+        }}
       >
         <mesh
-          geometry={nodes.Prop_4_1.geometry}
-          material={materials["Opaque(20,28,51).001"]}
+          geometry={nodes.Prop_3_1.geometry}
+          material={materials["Opaque(65,195,130).001"]}
         />
         <mesh
-          geometry={nodes.Prop_4_2.geometry}
-          material={materials["Opaque(65,195,130).001"]}
+          geometry={nodes.Prop_3_2.geometry}
+          material={materials["Opaque(20,28,51).001"]}
         />
       </group>
 
