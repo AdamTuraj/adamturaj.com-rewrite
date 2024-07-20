@@ -119,7 +119,7 @@ type GLTFResult = GLTF & {
 };
 
 const Drone = () => {
-  const { nodes, materials } = useGLTF("/models/drone.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF("/models/Drone.glb") as GLTFResult;
   const propRef = useRef<THREE.Group[]>([]);
 
   // useFrame(() => {
@@ -499,6 +499,6 @@ const Drone = () => {
   );
 };
 
-useGLTF.preload("/models/drone.glb");
+useGLTF.preload("/models/Drone.glb");
 
 export default Drone;
