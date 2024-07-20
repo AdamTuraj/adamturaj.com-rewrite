@@ -238,38 +238,42 @@ const Scene = () => {
 
       {/* Computer */}
       <group>
-        {/* <mesh
+        <mesh
           geometry={nodes.Computer_1.geometry}
           material={materials["Opaque(244,244,244)"]}
-        /> */}
+        />
         <mesh geometry={nodes.Computer_2.geometry} rotation={[0, 0, 0]} />
-        <Plane rotation={[-Math.PI / 5, -Math.PI / 5, -Math.PI / 4.4]}>
+        <Plane
+          rotation={[-Math.PI / 5.4, -Math.PI / 3.6, -Math.PI / 6.7]}
+          position={[0.025, 0.102, -0.3]}
+          scale={[0.3, 0.18, 1]}
+        >
           <meshBasicMaterial map={videoTexture} toneMapped={false} />
         </Plane>
-        {/* <mesh
+        <mesh
           geometry={nodes.Computer_3.geometry}
           material={materials["Opaque(5,5,5)"]}
-        /> */}
-        {/* <mesh
+        />
+        <mesh
           geometry={nodes.Computer_4.geometry}
           material={materials["Opaque(190,188,186)"]}
-        /> */}
-        {/* <mesh
+        />
+        <mesh
           geometry={nodes.Computer_5.geometry}
           material={materials["Opaque(128,128,128)"]}
-        /> */}
-        {/* <mesh
+        />
+        <mesh
           geometry={nodes.Computer_6.geometry}
           material={materials["Opaque(191,191,191)"]}
-        /> */}
-        {/* <mesh
+        />
+        <mesh
           geometry={nodes.Computer_7.geometry}
           material={materials["Opaque(63,63,63)"]}
-        /> */}
-        {/* <mesh
+        />
+        <mesh
           geometry={nodes.Computer_8.geometry}
           material={materials["Opaque(173,173,173)"]}
-        /> */}
+        />
       </group>
 
       {/* PCB */}
