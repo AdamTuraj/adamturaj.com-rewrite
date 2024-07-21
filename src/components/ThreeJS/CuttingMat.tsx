@@ -32,8 +32,8 @@ const CuttingMat = () => {
         geometry={nodes.Object_4.geometry}
         material={materials["palette.016"]}
         rotation={[Math.PI / 2, 0, Math.PI]}
-        position={[0, -0.012, -0.3]}
-        scale={0.03}
+        position={[5, -0.635, -15]}
+        scale={1.8}
       />
     </group>
   );

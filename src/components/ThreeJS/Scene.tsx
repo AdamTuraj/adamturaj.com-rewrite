@@ -4,13 +4,79 @@ Command: npx gltfjsx@6.4.1 PortfolioScene.glb --types
 */
 
 import * as THREE from "three";
-import React from "react";
+import React, { useRef } from "react";
 import { Plane, useGLTF, useTexture, useVideoTexture } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import CuttingMat from "./CuttingMat";
+import { useFrame } from "@react-three/fiber";
 
 type GLTFResult = GLTF & {
   nodes: {
+    ESC_PCB_1: THREE.Mesh;
+    ESC_PCB_2: THREE.Mesh;
+    ESC_PCB_3: THREE.Mesh;
+    ESC_PCB_4: THREE.Mesh;
+    ESC_PCB_5: THREE.Mesh;
+    ESC_PCB_6: THREE.Mesh;
+    ESC_PCB_7: THREE.Mesh;
+    FCU_PCB_1: THREE.Mesh;
+    FCU_PCB_2: THREE.Mesh;
+    FCU_PCB_3: THREE.Mesh;
+    FCU_PCB_4: THREE.Mesh;
+    FCU_PCB_5: THREE.Mesh;
+    FCU_PCB_6: THREE.Mesh;
+    FCU_PCB_7: THREE.Mesh;
+    FCU_PCB_8: THREE.Mesh;
+    FCU_PCB_9: THREE.Mesh;
+    FCU_PCB_10: THREE.Mesh;
+    FCU_PCB_11: THREE.Mesh;
+    FCU_PCB_12: THREE.Mesh;
+    FCU_PCB_13: THREE.Mesh;
+    FCU_PCB_14: THREE.Mesh;
+    FCU_PCB_15: THREE.Mesh;
+    FCU_PCB_16: THREE.Mesh;
+    FCU_PCB_17: THREE.Mesh;
+    FCU_PCB_18: THREE.Mesh;
+    FCU_PCB_19: THREE.Mesh;
+    FCU_PCB_20: THREE.Mesh;
+    FCU_PCB_21: THREE.Mesh;
+    FCU_PCB_22: THREE.Mesh;
+    Frame: THREE.Mesh;
+    Motor_1_1: THREE.Mesh;
+    Motor_1_2: THREE.Mesh;
+    Motor_1_3: THREE.Mesh;
+    Motor_1_4: THREE.Mesh;
+    Motor_1_5: THREE.Mesh;
+    Motor_1_6: THREE.Mesh;
+    Motor_2_1: THREE.Mesh;
+    Motor_2_2: THREE.Mesh;
+    Motor_2_3: THREE.Mesh;
+    Motor_2_4: THREE.Mesh;
+    Motor_2_5: THREE.Mesh;
+    Motor_2_6: THREE.Mesh;
+    Motor_3_1: THREE.Mesh;
+    Motor_3_2: THREE.Mesh;
+    Motor_3_3: THREE.Mesh;
+    Motor_3_4: THREE.Mesh;
+    Motor_3_5: THREE.Mesh;
+    Motor_3_6: THREE.Mesh;
+    Motor_4_1: THREE.Mesh;
+    Motor_4_2: THREE.Mesh;
+    Motor_4_3: THREE.Mesh;
+    Motor_4_4: THREE.Mesh;
+    Motor_4_5: THREE.Mesh;
+    Motor_4_6: THREE.Mesh;
+    Prop_1_1: THREE.Mesh;
+    Prop_1_2: THREE.Mesh;
+    Prop_2_1: THREE.Mesh;
+    Prop_2_2: THREE.Mesh;
+    Prop_3_1: THREE.Mesh;
+    Prop_3_2: THREE.Mesh;
+    Screw: THREE.Mesh;
+    Screw001: THREE.Mesh;
+    Screw002: THREE.Mesh;
+    Screw003: THREE.Mesh;
+    Spacers: THREE.Mesh;
     Computer_1: THREE.Mesh;
     Computer_2: THREE.Mesh;
     Computer_3: THREE.Mesh;
@@ -19,35 +85,10 @@ type GLTFResult = GLTF & {
     Computer_6: THREE.Mesh;
     Computer_7: THREE.Mesh;
     Computer_8: THREE.Mesh;
-    PCB_Model_1: THREE.Mesh;
-    PCB_Model_2: THREE.Mesh;
-    PCB_Model_3: THREE.Mesh;
-    PCB_Model_4: THREE.Mesh;
-    PCB_Model_5: THREE.Mesh;
-    PCB_Model_6: THREE.Mesh;
-    PCB_Model_7: THREE.Mesh;
-    PCB_Model_8: THREE.Mesh;
-    PCB_Model_9: THREE.Mesh;
-    PCB_Model_10: THREE.Mesh;
-    PCB_Model_11: THREE.Mesh;
-    PCB_Model_12: THREE.Mesh;
-    PCB_Model_13: THREE.Mesh;
-    PCB_Model_14: THREE.Mesh;
-    PCB_Model_15: THREE.Mesh;
-    PCB_Model_16: THREE.Mesh;
-    PCB_Model_17: THREE.Mesh;
-    PCB_Model_18: THREE.Mesh;
-    PCB_Model_19: THREE.Mesh;
-    PCB_Model_20: THREE.Mesh;
-    PCB_Model_21: THREE.Mesh;
     Bench_1: THREE.Mesh;
     Bench_2: THREE.Mesh;
     Bench_3: THREE.Mesh;
     Bench_4: THREE.Mesh;
-    USB_Cable: THREE.Mesh;
-    USB_Heads_1: THREE.Mesh;
-    USB_Heads_2: THREE.Mesh;
-    USB_Heads_3: THREE.Mesh;
     Probe_Cable: THREE.Mesh;
     Oscilloscope001: THREE.Mesh;
     Oscilloscope001_1: THREE.Mesh;
@@ -109,41 +150,50 @@ type GLTFResult = GLTF & {
     Screen_4: THREE.Mesh;
   };
   materials: {
+    ["Opaque(255,255,255).001"]: THREE.MeshStandardMaterial;
+    ["Plastic - Matte (Black).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(243,203,124).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(160,160,160).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(255,215,0).001"]: THREE.MeshStandardMaterial;
+    ["ABS (White).001"]: THREE.MeshStandardMaterial;
+    ["Copper - Raw.001"]: THREE.MeshStandardMaterial;
+    ["Opaque(65,195,130).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(250,235,214).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(51,153,102).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(210,209,199).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(97,69,55).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(204,204,204).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(228,227,207).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(21,22,24).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(247,224,153).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(38,37,37).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(219,188,126).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(87,173,113).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(70,70,70).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(255,245,209).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(150,150,150).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(50,50,50).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(185,185,185).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(37,36,36).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(176,169,152).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(41,41,41).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(192,192,192).001"]: THREE.MeshStandardMaterial;
+    ["Carbon Fiber - Plain.001"]: THREE.MeshStandardMaterial;
+    ["Opaque(188,80,47).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(20,28,51).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(190,188,186)"]: THREE.MeshStandardMaterial;
+    ["Opaque(255,254,246).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(82,105,43).001"]: THREE.MeshStandardMaterial;
+    ["Opaque(191,191,191)"]: THREE.MeshStandardMaterial;
     ["Opaque(244,244,244)"]: THREE.MeshStandardMaterial;
     ["Opaque(5,5,5)"]: THREE.MeshStandardMaterial;
-    ["Opaque(190,188,186)"]: THREE.MeshStandardMaterial;
     ["Opaque(128,128,128)"]: THREE.MeshStandardMaterial;
-    ["Opaque(191,191,191)"]: THREE.MeshStandardMaterial;
     ["Opaque(63,63,63)"]: THREE.MeshStandardMaterial;
     ["Opaque(173,173,173)"]: THREE.MeshStandardMaterial;
-    ["Opaque(204,204,204)"]: THREE.MeshStandardMaterial;
-    ["Opaque(219,188,126)"]: THREE.MeshStandardMaterial;
-    ["Opaque(250,235,214)"]: THREE.MeshStandardMaterial;
-    ["Opaque(65,195,130)"]: THREE.MeshStandardMaterial;
-    ["Opaque(51,153,102)"]: THREE.MeshStandardMaterial;
-    ["Opaque(210,209,199)"]: THREE.MeshStandardMaterial;
-    ["Opaque(97,69,55)"]: THREE.MeshStandardMaterial;
-    ["Opaque(228,227,207)"]: THREE.MeshStandardMaterial;
-    ["Opaque(21,22,24)"]: THREE.MeshStandardMaterial;
-    ["Opaque(87,173,113)"]: THREE.MeshStandardMaterial;
-    ["Opaque(70,70,70)"]: THREE.MeshStandardMaterial;
-    ["Opaque(38,37,37)"]: THREE.MeshStandardMaterial;
-    ["Opaque(255,255,255)"]: THREE.MeshStandardMaterial;
-    ["Opaque(247,224,153)"]: THREE.MeshStandardMaterial;
-    ["Opaque(255,245,209)"]: THREE.MeshStandardMaterial;
-    ["Opaque(150,150,150)"]: THREE.MeshStandardMaterial;
-    ["Opaque(50,50,50)"]: THREE.MeshStandardMaterial;
-    ["Opaque(185,185,185)"]: THREE.MeshStandardMaterial;
-    ["Opaque(37,36,36)"]: THREE.MeshStandardMaterial;
-    ["Opaque(176,169,152)"]: THREE.MeshStandardMaterial;
-    ["Opaque(41,41,41)"]: THREE.MeshStandardMaterial;
     Arbetshylla: THREE.MeshStandardMaterial;
     ["Arbetsbänk Skiva"]: THREE.MeshStandardMaterial;
     ["Leg.001"]: THREE.MeshStandardMaterial;
     ["Mat 01"]: THREE.MeshStandardMaterial;
-    ["black.004"]: THREE.MeshStandardMaterial;
-    ["black grain.004"]: THREE.MeshStandardMaterial;
-    ["metal_02.005"]: THREE.MeshStandardMaterial;
     ["Black.002"]: THREE.MeshStandardMaterial;
     ["Glas.001"]: THREE.MeshPhysicalMaterial;
     ["Gold.001"]: THREE.MeshStandardMaterial;
@@ -182,11 +232,14 @@ type GLTFResult = GLTF & {
     ["Metal.009"]: THREE.MeshStandardMaterial;
     ["Kabel-Schwarz.009"]: THREE.MeshStandardMaterial;
     Gold: THREE.MeshStandardMaterial;
+    ["Screen.001"]: THREE.MeshStandardMaterial;
     ["Platine.001"]: THREE.MeshStandardMaterial;
   };
 };
 
 const Scene = () => {
+  const propRef = useRef<THREE.Group[]>([]);
+
   const { nodes, materials } = useGLTF(
     "/models/PortfolioScene.glb"
   ) as GLTFResult;
@@ -194,9 +247,17 @@ const Scene = () => {
   const videoTexture = useVideoTexture("/textures/computerScreen.mp4");
   const oscilloscopeTexture = useTexture("/textures/oscilloscopeScreen.jpg");
 
+  useFrame(() => {
+    if (propRef.current.length === 0) return;
+
+    propRef.current.forEach((prop) => {
+      prop.rotation.y += 0.5;
+    });
+  });
+
   return (
     <>
-      <group dispose={null}>
+      <group dispose={null} scale={[50, 50, 50]}>
         {/* Bench */}
         <group scale={[0.145, 0.01, 0.92]}>
           <mesh
@@ -217,29 +278,381 @@ const Scene = () => {
           />
         </group>
 
-        {/* USB */}
-        <group>
-          {/* USB Cable */}
-          <mesh
-            geometry={nodes.USB_Cable.geometry}
-            material={materials["black.004"]}
-          />
-
-          {/* USB Heads */}
-          <group>
+        {/* Drone */}
+        <group position={[-0.228, 0, 0.238]} scale={0.018}>
+          {/* ESC */}
+          <group
+            position={[-0.212, 0.55, -0.318]}
+            rotation={[0, Math.PI / 4, -Math.PI]}
+          >
             <mesh
-              geometry={nodes.USB_Heads_1.geometry}
-              material={materials["black grain.004"]}
+              geometry={nodes.ESC_PCB_1.geometry}
+              material={materials["Opaque(255,255,255).001"]}
             />
             <mesh
-              geometry={nodes.USB_Heads_2.geometry}
-              material={materials["black.004"]}
+              geometry={nodes.ESC_PCB_2.geometry}
+              material={materials["Plastic - Matte (Black).001"]}
             />
             <mesh
-              geometry={nodes.USB_Heads_3.geometry}
-              material={materials["metal_02.005"]}
+              geometry={nodes.ESC_PCB_3.geometry}
+              material={materials["Opaque(243,203,124).001"]}
+            />
+            <mesh
+              geometry={nodes.ESC_PCB_4.geometry}
+              material={materials["Opaque(160,160,160).001"]}
+            />
+            <mesh
+              geometry={nodes.ESC_PCB_5.geometry}
+              material={materials["Opaque(255,215,0).001"]}
+            />
+            <mesh
+              geometry={nodes.ESC_PCB_6.geometry}
+              material={materials["ABS (White).001"]}
+            />
+            <mesh
+              geometry={nodes.ESC_PCB_7.geometry}
+              material={materials["Copper - Raw.001"]}
             />
           </group>
+
+          {/* FCU */}
+          <group position={[10.493, 1.162, -16.029]} rotation={[0, -1.571, 0]}>
+            <mesh
+              geometry={nodes.FCU_PCB_1.geometry}
+              material={materials["Opaque(255,255,255).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_2.geometry}
+              material={materials["Opaque(65,195,130).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_3.geometry}
+              material={materials["Opaque(250,235,214).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_4.geometry}
+              material={materials["Opaque(51,153,102).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_5.geometry}
+              material={materials["Opaque(210,209,199).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_6.geometry}
+              material={materials["Opaque(97,69,55).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_7.geometry}
+              material={materials["Opaque(204,204,204).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_8.geometry}
+              material={materials["Opaque(228,227,207).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_9.geometry}
+              material={materials["Opaque(21,22,24).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_10.geometry}
+              material={materials["Opaque(247,224,153).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_11.geometry}
+              material={materials["Opaque(38,37,37).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_12.geometry}
+              material={materials["Opaque(219,188,126).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_13.geometry}
+              material={materials["Opaque(87,173,113).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_14.geometry}
+              material={materials["Opaque(70,70,70).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_15.geometry}
+              material={materials["Opaque(255,245,209).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_16.geometry}
+              material={materials["Opaque(150,150,150).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_17.geometry}
+              material={materials["Opaque(50,50,50).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_18.geometry}
+              material={materials["Opaque(185,185,185).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_19.geometry}
+              material={materials["Opaque(37,36,36).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_20.geometry}
+              material={materials["Opaque(176,169,152).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_21.geometry}
+              material={materials["Opaque(41,41,41).001"]}
+            />
+            <mesh
+              geometry={nodes.FCU_PCB_22.geometry}
+              material={materials["Opaque(192,192,192).001"]}
+            />
+          </group>
+
+          {/* Frame */}
+          <mesh
+            geometry={nodes.Frame.geometry}
+            material={materials["Carbon Fiber - Plain.001"]}
+          />
+
+          {/* Motor 1 */}
+          <group
+            position={[7.983, 6.69, 4.902]}
+            rotation={[0, 0, -Math.PI / 2]}
+          >
+            <mesh
+              geometry={nodes.Motor_1_1.geometry}
+              material={materials["Opaque(188,80,47).001"]}
+            />
+            <mesh
+              geometry={nodes.Motor_1_2.geometry}
+              material={materials["Opaque(20,28,51).001"]}
+            />
+            <mesh
+              geometry={nodes.Motor_1_3.geometry}
+              material={materials["Opaque(190,188,186)"]}
+            />
+            <mesh
+              geometry={nodes.Motor_1_4.geometry}
+              material={materials["Opaque(255,254,246).001"]}
+            />
+            <mesh
+              geometry={nodes.Motor_1_5.geometry}
+              material={materials["Opaque(82,105,43).001"]}
+            />
+            <mesh
+              geometry={nodes.Motor_1_6.geometry}
+              material={materials["Opaque(191,191,191)"]}
+            />
+          </group>
+
+          {/* Motor 2 */}
+          <group
+            position={[-7.983, 6.69, 4.902]}
+            rotation={[0, 0, -Math.PI / 2]}
+          >
+            <mesh
+              geometry={nodes.Motor_2_1.geometry}
+              material={materials["Opaque(188,80,47).001"]}
+            />
+            <mesh
+              geometry={nodes.Motor_2_2.geometry}
+              material={materials["Opaque(20,28,51).001"]}
+            />
+            <mesh
+              geometry={nodes.Motor_2_3.geometry}
+              material={materials["Opaque(190,188,186)"]}
+            />
+            <mesh
+              geometry={nodes.Motor_2_4.geometry}
+              material={materials["Opaque(255,254,246).001"]}
+            />
+            <mesh
+              geometry={nodes.Motor_2_5.geometry}
+              material={materials["Opaque(82,105,43).001"]}
+            />
+            <mesh
+              geometry={nodes.Motor_2_6.geometry}
+              material={materials["Opaque(191,191,191)"]}
+            />
+          </group>
+
+          {/* Motor 3 */}
+          <group
+            position={[7.983, 6.69, -4.902]}
+            rotation={[-Math.PI, 0, Math.PI / 2]}
+          >
+            <mesh
+              geometry={nodes.Motor_3_1.geometry}
+              material={materials["Opaque(188,80,47).001"]}
+            />
+            <mesh
+              geometry={nodes.Motor_3_2.geometry}
+              material={materials["Opaque(20,28,51).001"]}
+            />
+            <mesh
+              geometry={nodes.Motor_3_3.geometry}
+              material={materials["Opaque(190,188,186)"]}
+            />
+            <mesh
+              geometry={nodes.Motor_3_4.geometry}
+              material={materials["Opaque(255,254,246).001"]}
+            />
+            <mesh
+              geometry={nodes.Motor_3_5.geometry}
+              material={materials["Opaque(82,105,43).001"]}
+            />
+            <mesh
+              geometry={nodes.Motor_3_6.geometry}
+              material={materials["Opaque(191,191,191)"]}
+            />
+          </group>
+
+          {/* Motor 4 */}
+          <group
+            position={[-7.983, 6.69, -4.902]}
+            rotation={[Math.PI, 0, Math.PI / 2]}
+          >
+            <mesh
+              geometry={nodes.Motor_4_1.geometry}
+              material={materials["Opaque(188,80,47).001"]}
+            />
+            <mesh
+              geometry={nodes.Motor_4_2.geometry}
+              material={materials["Opaque(20,28,51).001"]}
+            />
+            <mesh
+              geometry={nodes.Motor_4_3.geometry}
+              material={materials["Opaque(190,188,186)"]}
+            />
+            <mesh
+              geometry={nodes.Motor_4_4.geometry}
+              material={materials["Opaque(255,254,246).001"]}
+            />
+            <mesh
+              geometry={nodes.Motor_4_5.geometry}
+              material={materials["Opaque(82,105,43).001"]}
+            />
+            <mesh
+              geometry={nodes.Motor_4_6.geometry}
+              material={materials["Opaque(191,191,191)"]}
+            />
+          </group>
+
+          {/* Prop 1 */}
+          <group
+            position={[7.983, 1.78, 7.166]}
+            ref={(el) => {
+              if (el) {
+                propRef.current[0] = el;
+              }
+            }}
+          >
+            <mesh
+              geometry={nodes.Prop_1_1.geometry}
+              material={materials["Opaque(65,195,130).001"]}
+            />
+            <mesh
+              geometry={nodes.Prop_1_2.geometry}
+              material={materials["Opaque(20,28,51).001"]}
+            />
+          </group>
+
+          {/* Prop 2 */}
+          <group
+            position={[-7.983, 1.78, 7.166]}
+            rotation={[0, 0, -Math.PI]}
+            ref={(el) => {
+              if (el) {
+                propRef.current[1] = el;
+              }
+            }}
+          >
+            <mesh
+              geometry={nodes.Prop_2_1.geometry}
+              material={materials["Opaque(65,195,130).001"]}
+            />
+            <mesh
+              geometry={nodes.Prop_2_2.geometry}
+              material={materials["Opaque(20,28,51).001"]}
+            />
+          </group>
+
+          {/* Prop 3 */}
+          <group
+            position={[7.983, 1.78, -7.166]}
+            rotation={[Math.PI, 0, 0]}
+            ref={(el) => {
+              if (el) {
+                propRef.current[2] = el;
+              }
+            }}
+          >
+            <mesh
+              geometry={nodes.Prop_3_1.geometry}
+              material={materials["Opaque(65,195,130).001"]}
+            />
+            <mesh
+              geometry={nodes.Prop_3_2.geometry}
+              material={materials["Opaque(20,28,51).001"]}
+            />
+          </group>
+
+          {/* Prop 4 */}
+          <group
+            position={[-7.983, 1.78, -7.166]}
+            rotation={[0, 0, -Math.PI]}
+            ref={(el) => {
+              if (el) {
+                propRef.current[3] = el;
+              }
+            }}
+          >
+            <mesh
+              geometry={nodes.Prop_3_1.geometry}
+              material={materials["Opaque(65,195,130).001"]}
+            />
+            <mesh
+              geometry={nodes.Prop_3_2.geometry}
+              material={materials["Opaque(20,28,51).001"]}
+            />
+          </group>
+
+          {/* Screw 1 */}
+          <mesh
+            geometry={nodes.Screw.geometry}
+            material={materials["Opaque(160,160,160).001"]}
+            position={[1.561, 1.163, -1.549]}
+            rotation={[0, -1.571, 0]}
+          />
+
+          {/* Screw 2 */}
+          <mesh
+            geometry={nodes.Screw001.geometry}
+            material={materials["Opaque(160,160,160).001"]}
+            position={[1.561, 1.163, 1.501]}
+            rotation={[0, -1.571, 0]}
+          />
+
+          {/* Screw 3 */}
+          <mesh
+            geometry={nodes.Screw002.geometry}
+            material={materials["Opaque(160,160,160).001"]}
+            position={[-1.489, 1.163, 1.501]}
+            rotation={[0, -1.571, 0]}
+          />
+
+          {/* Screw 4 */}
+          <mesh
+            geometry={nodes.Screw003.geometry}
+            material={materials["Opaque(160,160,160).001"]}
+            position={[-1.489, 1.163, -1.549]}
+            rotation={[0, -1.571, 0]}
+          />
+
+          {/* Spacers */}
+          <mesh
+            geometry={nodes.Spacers.geometry}
+            material={materials["Opaque(255,215,0).001"]}
+          />
         </group>
 
         {/* Computer */}
@@ -279,94 +692,6 @@ const Scene = () => {
           <mesh
             geometry={nodes.Computer_8.geometry}
             material={materials["Opaque(173,173,173)"]}
-          />
-        </group>
-
-        {/* PCB */}
-        <group>
-          <mesh
-            geometry={nodes.PCB_Model_1.geometry}
-            material={materials["Opaque(204,204,204)"]}
-          />
-          <mesh
-            geometry={nodes.PCB_Model_2.geometry}
-            material={materials["Opaque(219,188,126)"]}
-          />
-          <mesh
-            geometry={nodes.PCB_Model_3.geometry}
-            material={materials["Opaque(250,235,214)"]}
-          />
-          <mesh
-            geometry={nodes.PCB_Model_4.geometry}
-            material={materials["Opaque(65,195,130)"]}
-          />
-          <mesh
-            geometry={nodes.PCB_Model_5.geometry}
-            material={materials["Opaque(51,153,102)"]}
-          />
-          <mesh
-            geometry={nodes.PCB_Model_6.geometry}
-            material={materials["Opaque(210,209,199)"]}
-          />
-          <mesh
-            geometry={nodes.PCB_Model_7.geometry}
-            material={materials["Opaque(97,69,55)"]}
-          />
-          <mesh
-            geometry={nodes.PCB_Model_8.geometry}
-            material={materials["Opaque(228,227,207)"]}
-          />
-          <mesh
-            geometry={nodes.PCB_Model_9.geometry}
-            material={materials["Opaque(21,22,24)"]}
-          />
-          <mesh
-            geometry={nodes.PCB_Model_10.geometry}
-            material={materials["Opaque(87,173,113)"]}
-          />
-          <mesh
-            geometry={nodes.PCB_Model_11.geometry}
-            material={materials["Opaque(70,70,70)"]}
-          />
-          <mesh
-            geometry={nodes.PCB_Model_12.geometry}
-            material={materials["Opaque(38,37,37)"]}
-          />
-          <mesh
-            geometry={nodes.PCB_Model_13.geometry}
-            material={materials["Opaque(255,255,255)"]}
-          />
-          <mesh
-            geometry={nodes.PCB_Model_14.geometry}
-            material={materials["Opaque(247,224,153)"]}
-          />
-          <mesh
-            geometry={nodes.PCB_Model_15.geometry}
-            material={materials["Opaque(255,245,209)"]}
-          />
-          <mesh
-            geometry={nodes.PCB_Model_16.geometry}
-            material={materials["Opaque(150,150,150)"]}
-          />
-          <mesh
-            geometry={nodes.PCB_Model_17.geometry}
-            material={materials["Opaque(50,50,50)"]}
-          />
-          <mesh
-            geometry={nodes.PCB_Model_18.geometry}
-            material={materials["Opaque(185,185,185)"]}
-          />
-          <mesh
-            geometry={nodes.PCB_Model_19.geometry}
-            material={materials["Opaque(37,36,36)"]}
-          />
-          <mesh
-            geometry={nodes.PCB_Model_20.geometry}
-            material={materials["Opaque(176,169,152)"]}
-          />
-          <mesh
-            geometry={nodes.PCB_Model_21.geometry}
-            material={materials["Opaque(41,41,41)"]}
           />
         </group>
 

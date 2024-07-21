@@ -17,8 +17,6 @@ import {
   OrbitControls,
 } from "@react-three/drei";
 
-import Drone from "./Drone";
-
 const Loader = () => {
   const { progress } = useProgress();
 
@@ -47,15 +45,10 @@ const ThreeCanvas = () => {
         <AdaptiveDpr pixelated />
         <PerspectiveCamera
           makeDefault
-          position={[
-            -0.35773433178572334, 0.12123904332118751, 0.05623705731566958,
-          ]}
-          rotation={[
-            -0.6548807824899788, -1.3727113665847221, -0.645365890277982,
-          ]}
-          zoom={0.8}
+          position={[-35, 8, 8]}
+          rotation={[-1.1, -1.3, -1.08]}
         />
-        {/* <OrbitControls makeDefault /> */}
+        {/* <OrbitControls makeDefault enablePan={false} position={[-35, 8, 13]} /> */}
 
         <Background />
 
@@ -70,7 +63,6 @@ const ThreeCanvas = () => {
 
         <ScrollControls pages={5}>
           <Scene />
-          {/* <Drone /> */}
         </ScrollControls>
       </Canvas>
     </Suspense>
