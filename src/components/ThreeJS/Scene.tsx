@@ -5,7 +5,13 @@ Command: npx gltfjsx@6.4.1 PortfolioScene.glb --types
 
 import * as THREE from "three";
 import React, { useRef } from "react";
-import { Plane, useGLTF, useTexture, useVideoTexture } from "@react-three/drei";
+import {
+  Plane,
+  useGLTF,
+  useScroll,
+  useTexture,
+  useVideoTexture,
+} from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import CuttingMat from "./CuttingMat";
 import { useFrame } from "@react-three/fiber";
@@ -239,12 +245,17 @@ type GLTFResult = GLTF & {
 
 const Scene = () => {
   const propRef = useRef<THREE.Group[]>([]);
+  const computerScreenRef = useRef<THREE.MeshBasicMaterial>(null);
+
+  const scroll = useScroll();
 
   const { nodes, materials } = useGLTF(
     "/models/PortfolioScene.glb"
   ) as GLTFResult;
 
   const videoTexture = useVideoTexture("/textures/computerScreen.mp4");
+  const bootupTexture = useTexture("/textures/bootupScreen.jpg");
+
   const oscilloscopeTexture = useTexture("/textures/oscilloscopeScreen.jpg");
 
   useFrame(() => {
@@ -253,6 +264,16 @@ const Scene = () => {
     propRef.current.forEach((prop) => {
       prop.rotation.y += 0.5;
     });
+
+    const a = scroll.visible(1 / 1000, 1 / 20);
+
+    console.log(a);
+
+    if (computerScreenRef.current && a) {
+      computerScreenRef.current.map = bootupTexture;
+    } else if (computerScreenRef.current) {
+      computerScreenRef.current.map = videoTexture;
+    }
   });
 
   return (
@@ -667,7 +688,11 @@ const Scene = () => {
             position={[0.025, 0.102, -0.3]}
             scale={[0.3, 0.18, 1]}
           >
-            <meshBasicMaterial map={videoTexture} toneMapped={false} />
+            <meshBasicMaterial
+              map={videoTexture}
+              toneMapped={false}
+              ref={computerScreenRef}
+            />
           </Plane>
           <mesh
             geometry={nodes.Computer_3.geometry}

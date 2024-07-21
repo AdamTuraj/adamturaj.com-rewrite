@@ -2,6 +2,7 @@
 
 import Scene from "./Scene";
 import Background from "./Background";
+import Camera from "./Camera";
 
 import { Suspense, useState } from "react";
 
@@ -12,9 +13,7 @@ import {
   useProgress,
   Preload,
   PerformanceMonitor,
-  PerspectiveCamera,
   Stats,
-  OrbitControls,
 } from "@react-three/drei";
 
 const Loader = () => {
@@ -43,12 +42,6 @@ const ThreeCanvas = () => {
         <color attach="background" args={["#fff"]} />
         <ambientLight intensity={1.2} />
         <AdaptiveDpr pixelated />
-        <PerspectiveCamera
-          makeDefault
-          position={[-35, 8, 8]}
-          rotation={[-1.1, -1.3, -1.08]}
-        />
-        {/* <OrbitControls makeDefault enablePan={false} position={[-35, 8, 13]} /> */}
 
         <Background />
 
@@ -62,6 +55,7 @@ const ThreeCanvas = () => {
         />
 
         <ScrollControls pages={5}>
+          <Camera />
           <Scene />
         </ScrollControls>
       </Canvas>
