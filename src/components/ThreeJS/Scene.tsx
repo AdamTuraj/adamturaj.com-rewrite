@@ -255,6 +255,7 @@ const Scene = () => {
 
   const videoTexture = useVideoTexture("/textures/computerScreen.mp4");
   const bootupTexture = useTexture("/textures/bootupScreen.jpg");
+  const schematicTexture = useTexture("/textures/kicadSchematic.jpg");
 
   const oscilloscopeTexture = useTexture("/textures/oscilloscopeScreen.jpg");
 
@@ -265,15 +266,18 @@ const Scene = () => {
       prop.rotation.y += 0.5;
     });
 
-    const a = scroll.visible(1 / 1000, 1 / 20);
+    if (!computerScreenRef.current) return;
 
-    console.log(a);
-
-    if (computerScreenRef.current && a) {
-      computerScreenRef.current.map = bootupTexture;
-    } else if (computerScreenRef.current) {
+    const a = scroll.range(0, 1 / 20);
+    if (a) {
       computerScreenRef.current.map = videoTexture;
     }
+
+    const bootup = scroll.visible(1 / 1000, 1 / 20);
+    if (bootup) computerScreenRef.current.map = bootupTexture;
+
+    const schematic = scroll.visible(1 / 10, 1 / 4);
+    if (schematic) computerScreenRef.current.map = schematicTexture;
   });
 
   return (
