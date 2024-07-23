@@ -31,40 +31,38 @@ const Loader = () => {
 
 const ThreeCanvas = () => {
   const [dpr, setDpr] = useState(1.5);
-  const [dialog, setDialog] = useState<string | null>("Test");
+  const [dialog, setDialog] = useState<string | null>(null);
 
   return (
-    <>
+    <Suspense fallback={<Loader />}>
       {dialog && <Dialog text={dialog} />}
-      <Suspense fallback={<Loader />}>
-        <Canvas
-          shadows
-          style={{ width: "100vw", height: "100vh" }}
-          // className="blur-[2px]"
-          dpr={dpr}
-        >
-          <color attach="background" args={["#fff"]} />
-          <ambientLight intensity={1.2} />
-          <AdaptiveDpr pixelated />
+      <Canvas
+        shadows
+        style={{ width: "100vw", height: "100vh" }}
+        // className="blur-[2px]"
+        dpr={dpr}
+      >
+        <color attach="background" args={["#fff"]} />
+        <ambientLight intensity={1.2} />
+        <AdaptiveDpr pixelated />
 
-          <Background />
+        <Background />
 
-          <Preload all />
+        <Preload all />
 
-          <Stats showPanel={0} className="stats" />
+        <Stats showPanel={0} className="stats" />
 
-          <PerformanceMonitor
-            onIncline={() => setDpr(2)}
-            onDecline={() => setDpr(1)}
-          />
+        <PerformanceMonitor
+          onIncline={() => setDpr(2)}
+          onDecline={() => setDpr(1)}
+        />
 
-          <ScrollControls pages={5}>
-            <Camera />
-            <Scene dialog={setDialog} />
-          </ScrollControls>
-        </Canvas>
-      </Suspense>
-    </>
+        <ScrollControls pages={5}>
+          <Camera />
+          <Scene setDialog={setDialog} />
+        </ScrollControls>
+      </Canvas>
+    </Suspense>
   );
 };
 
