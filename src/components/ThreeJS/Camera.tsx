@@ -12,8 +12,6 @@ const Camera = () => {
     // Position: [-4.714549200748335, 7.539716916804118, -10.618313806744329]
     // Rotation: [-0.6006714456155978, -0.8746568339424584, -0.4840041727658114]
 
-    console.log(a);
-
     camera.position.x = a * -4.71 + (1 - a) * -35;
     camera.position.y = a * 7.53 + (1 - a) * 8;
     camera.position.z = a * -10.6 + (1 - a) * 8;

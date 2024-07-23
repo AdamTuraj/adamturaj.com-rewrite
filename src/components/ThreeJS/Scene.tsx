@@ -15,6 +15,7 @@ import {
 import { GLTF } from "three-stdlib";
 import CuttingMat from "./CuttingMat";
 import { useFrame } from "@react-three/fiber";
+import Dialog from "./Dialog";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -243,7 +244,7 @@ type GLTFResult = GLTF & {
   };
 };
 
-const Scene = () => {
+const Scene = ({ setDialog }) => {
   const propRef = useRef<THREE.Group[]>([]);
   const computerScreenRef = useRef<THREE.MeshBasicMaterial>(null);
 
@@ -276,12 +277,13 @@ const Scene = () => {
     const bootup = scroll.visible(1 / 1000, 1 / 20);
     if (bootup) computerScreenRef.current.map = bootupTexture;
 
-    const schematic = scroll.visible(1 / 10, 1 / 4);
+    const schematic = scroll.visible(1 / 20, 1 / 4);
     if (schematic) computerScreenRef.current.map = schematicTexture;
   });
 
   return (
     <>
+      <CuttingMat />
       <group dispose={null} scale={[50, 50, 50]}>
         {/* Bench */}
         <group scale={[0.145, 0.01, 0.92]}>
@@ -967,7 +969,6 @@ const Scene = () => {
           />
         </group>
       </group>
-      <CuttingMat />
     </>
   );
 };
