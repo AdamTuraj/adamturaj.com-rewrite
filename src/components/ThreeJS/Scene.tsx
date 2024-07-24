@@ -245,6 +245,14 @@ type GLTFResult = GLTF & {
   };
 };
 
+let propSpeed = 0.8;
+let i = 1;
+let interval: NodeJS.Timeout;
+
+const newPropSpeed = (index: number) => {
+  return 0.8 * Math.pow(0.9, index);
+};
+
 const Scene = ({
   setDialog,
   section,
@@ -254,8 +262,6 @@ const Scene = ({
 }) => {
   const propRef = useRef<THREE.Group[]>([]);
   const computerScreenRef = useRef<THREE.MeshBasicMaterial>(null);
-
-  const scroll = useScroll();
 
   const { nodes, materials } = useGLTF(
     "/models/PortfolioScene.glb"
@@ -271,7 +277,7 @@ const Scene = ({
     if (propRef.current.length === 0) return;
 
     propRef.current.forEach((prop) => {
-      prop.rotation.y += 0.5;
+      prop.rotation.y += propSpeed;
     });
   });
 
@@ -281,9 +287,25 @@ const Scene = ({
     if (section === 0) {
       computerScreenRef.current.map = videoTexture;
     } else if (section === 1) {
+      interval = setInterval(() => {
+        if (propSpeed < 0.05) {
+          clearInterval(interval);
+          propSpeed = 0;
+        } else {
+          propSpeed = newPropSpeed(i);
+          i++;
+        }
+      }, 1000);
+
       computerScreenRef.current.map = bootupTexture;
       setDialog(
-        "It's about time you started. I was losing faith in you. Anyways welcome to my portfolio. My name is Adam. Lets boot up Kicad and get going!"
+        "It's about time you started. I was losing faith in you. Anyways welcome to my portfolio. My name is Adam Turaj. Lets boot up Kicad and get going!"
+      );
+    } else if (section === 2) {
+      setDialog("");
+      computerScreenRef.current.map = schematicTexture;
+      setDialog(
+        "Welcome to Kicad, this is where I do my designing. Here I am working on a simple microcontroller. Lets fast forward in time slightly and...tada. Here is the final schematic!"
       );
     }
   }, [section, computerScreenRef]);

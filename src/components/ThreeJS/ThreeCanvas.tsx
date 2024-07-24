@@ -9,7 +9,6 @@ import { Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
   AdaptiveDpr,
-  ScrollControls,
   useProgress,
   Preload,
   PerformanceMonitor,
@@ -37,9 +36,11 @@ const ThreeCanvas = () => {
   const [dialogDone, setDialogDone] = useState(true);
 
   const onClick = () => {
-    if (dialogDone) {
-      setSection((s) => s + 1);
-    }
+    setTimeout(() => {
+      if (dialogDone) {
+        setSection((s) => s + 1);
+      }
+    }, 200);
   };
 
   return (
@@ -67,10 +68,8 @@ const ThreeCanvas = () => {
           onDecline={() => setDpr(1)}
         />
 
-        <ScrollControls pages={5}>
-          <Camera />
-          <Scene setDialog={setDialog} section={section} />
-        </ScrollControls>
+        <Camera section={section} />
+        <Scene setDialog={setDialog} section={section} />
       </Canvas>
     </Suspense>
   );

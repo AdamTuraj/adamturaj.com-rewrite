@@ -1,31 +1,29 @@
-import { OrbitControls, PerspectiveCamera, useScroll } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import { useThree } from "@react-three/fiber";
+import { useEffect } from "react";
 
-const Camera = () => {
-  const scroll = useScroll();
+const Camera = ({section}: {section: number}) => {
+  const {camera} = useThree()
 
-  useFrame(({ camera }) => {
-    const a = scroll.range(0, 1 / 20);
+  useEffect(() => {
+    if (section == 2) {
+      const {rotation, position} = camera
+        position.x = -4.71
+        position.y = 7.3
+        position.z = -10.7
 
-    // Position: [-4.714549200748335, 7.539716916804118, -10.618313806744329]
-    // Rotation: [-0.6006714456155978, -0.8746568339424584, -0.4840041727658114]
-
-    camera.position.x = a * -4.71 + (1 - a) * -35;
-    camera.position.y = a * 7.53 + (1 - a) * 8;
-    camera.position.z = a * -10.6 + (1 - a) * 8;
-
-    camera.rotation.x = a * -0.6 + (1 - a) * -1.1;
-    camera.rotation.y = a * -0.875 + (1 - a) * -1.3;
-    camera.rotation.z = a * -0.484 + (1 - a) * -1.08;
-  });
+        rotation.x = -0.6
+        rotation.y = -0.875
+        rotation.z = -0.484
+    }
+  }, [section])
 
   return (
     <>
       {/* <PerspectiveCamera
         makeDefault
-        position={[-3.55, 6.94, -11.3]}
-        rotation={[-0.53, -0.888, -0.43]}
-        zoom={0.6}
+        position={[-4.71, 7.3, -10.7]}
+        rotation={[-0.6, -0.875, -0.484]}
       /> */}
       <PerspectiveCamera
         makeDefault
