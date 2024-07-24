@@ -284,9 +284,10 @@ const Scene = ({
   useEffect(() => {
     if (!computerScreenRef.current) return;
 
-    if (section === 0) {
-      computerScreenRef.current.map = videoTexture;
-    } else if (section === 1) {
+    computerScreenRef.current.color = new THREE.Color("#fff");
+    computerScreenRef.current.map = schematicTexture;
+
+    if (section === 1) {
       interval = setInterval(() => {
         if (propSpeed < 0.05) {
           clearInterval(interval);
@@ -296,6 +297,8 @@ const Scene = ({
           i++;
         }
       }, 1000);
+
+      computerScreenRef.current.color = new THREE.Color("#fff");
 
       computerScreenRef.current.map = bootupTexture;
       setDialog(
@@ -724,7 +727,7 @@ const Scene = ({
             scale={[0.3, 0.18, 1]}
           >
             <meshBasicMaterial
-              map={videoTexture}
+              color="#000"
               toneMapped={false}
               ref={computerScreenRef}
             />

@@ -34,11 +34,12 @@ const ThreeCanvas = () => {
 
   const [section, setSection] = useState(0);
   const [dialogDone, setDialogDone] = useState(true);
+  const [showScene, setSceneVisibility] = useState(true);
 
   const onClick = () => {
     setTimeout(() => {
       if (dialogDone) {
-        setSection((s) => s + 1);
+        setSection((s) => 2);
       }
     }, 200);
   };
@@ -57,8 +58,6 @@ const ThreeCanvas = () => {
         <ambientLight intensity={1.2} />
         <AdaptiveDpr pixelated />
 
-        <Background />
-
         <Preload all />
 
         <Stats showPanel={0} className="stats" />
@@ -68,8 +67,9 @@ const ThreeCanvas = () => {
           onDecline={() => setDpr(1)}
         />
 
-        <Camera section={section} />
-        <Scene setDialog={setDialog} section={section} />
+        <Camera section={section} setSceneVisibility={setSceneVisibility} />
+        {showScene && <Scene setDialog={setDialog} section={section} />}
+        {showScene && <Background />}
       </Canvas>
     </Suspense>
   );
