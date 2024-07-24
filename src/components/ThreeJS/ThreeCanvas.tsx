@@ -33,14 +33,24 @@ const ThreeCanvas = () => {
   const [dpr, setDpr] = useState(1.5);
   const [dialog, setDialog] = useState<string | null>(null);
 
+  const [section, setSection] = useState(0);
+  const [dialogDone, setDialogDone] = useState(true);
+
+  const onClick = () => {
+    if (dialogDone) {
+      setSection((s) => s + 1);
+    }
+  };
+
   return (
     <Suspense fallback={<Loader />}>
-      {dialog && <Dialog text={dialog} />}
+      {dialog && <Dialog text={dialog} setDialogDone={setDialogDone} />}
       <Canvas
         shadows
         style={{ width: "100vw", height: "100vh" }}
-        // className="blur-[2px]"
+        className={dialogDone ? "cursor-pointer" : "cursor-none"}
         dpr={dpr}
+        onClick={onClick}
       >
         <color attach="background" args={["#fff"]} />
         <ambientLight intensity={1.2} />
@@ -59,7 +69,7 @@ const ThreeCanvas = () => {
 
         <ScrollControls pages={5}>
           <Camera />
-          <Scene setDialog={setDialog} />
+          <Scene setDialog={setDialog} section={section} />
         </ScrollControls>
       </Canvas>
     </Suspense>

@@ -1,5 +1,3 @@
-import { useRef } from "react";
-
 import { OrbitControls, PerspectiveCamera, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 

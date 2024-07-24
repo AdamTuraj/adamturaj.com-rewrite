@@ -4,24 +4,27 @@ const Typewriter = (text: string, delay: number) => {
   const [index, setIndex] = useState<number>(0);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let timeout: NodeJS.Timeout;
 
     const typeLetter = () => {
       const randomDelay = delay + (Math.random() * 20 - 10);
 
-      interval = setTimeout(() => {
-        if (index < text.length) {
-          setIndex((prev) => prev + 1);
+      timeout = setTimeout(
+        () => {
+          if (index < text.length) {
+            setIndex((prev) => prev + 1);
 
-          typeLetter();
-        }
-      }, randomDelay);
+            typeLetter();
+          }
+        },
+        text.charAt(index - 1) == "." ? randomDelay * 4 : randomDelay
+      );
     };
 
     typeLetter();
 
-    return () => clearTimeout(interval);
-  }, [text, delay]);
+    return () => clearTimeout(timeout);
+  }, [text, delay, index]);
 
   return text.slice(0, index);
 };
