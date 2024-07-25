@@ -267,9 +267,7 @@ const Scene = ({
     "/models/PortfolioScene.glb"
   ) as GLTFResult;
 
-  const videoTexture = useVideoTexture("/textures/computerScreen.mp4");
   const bootupTexture = useTexture("/textures/bootupScreen.jpg");
-  const schematicTexture = useTexture("/textures/kicadSchematic.jpg");
 
   const oscilloscopeTexture = useTexture("/textures/oscilloscopeScreen.jpg");
 
@@ -283,9 +281,6 @@ const Scene = ({
 
   useEffect(() => {
     if (!computerScreenRef.current) return;
-
-    computerScreenRef.current.color = new THREE.Color("#fff");
-    computerScreenRef.current.map = schematicTexture;
 
     if (section === 1) {
       interval = setInterval(() => {
@@ -306,10 +301,11 @@ const Scene = ({
       );
     } else if (section === 2) {
       setDialog("");
-      computerScreenRef.current.map = schematicTexture;
-      setDialog(
-        "Welcome to Kicad, this is where I do my designing. Here I am working on a simple microcontroller. Lets fast forward in time slightly and...tada. Here is the final schematic!"
-      );
+      setTimeout(() => {
+        setDialog(
+          "Give it a few more moments to start up and we'll be ready to go...and perfect. Welcome to Kicad, this is where I do my designing. Here I am working on a simple microcontroller. Lets fast forward in time slightly and...tada. Here is the final schematic!"
+        );
+      }, 500)
     }
   }, [section, computerScreenRef]);
 

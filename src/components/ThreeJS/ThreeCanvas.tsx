@@ -15,6 +15,7 @@ import {
   Stats,
 } from "@react-three/drei";
 import Dialog from "./Dialog";
+import ComputerScreen from "./ComputerScreen";
 
 const Loader = () => {
   const { progress } = useProgress();
@@ -39,7 +40,7 @@ const ThreeCanvas = () => {
   const onClick = () => {
     setTimeout(() => {
       if (dialogDone) {
-        setSection((s) => 2);
+        setSection((s) => s + 1);
       }
     }, 200);
   };
@@ -47,6 +48,7 @@ const ThreeCanvas = () => {
   return (
     <Suspense fallback={<Loader />}>
       {dialog && <Dialog text={dialog} setDialogDone={setDialogDone} />}
+      {!showScene && <ComputerScreen section={section} />}
       <Canvas
         shadows
         style={{ width: "100vw", height: "100vh" }}
