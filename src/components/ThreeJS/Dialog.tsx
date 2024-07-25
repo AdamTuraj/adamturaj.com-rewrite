@@ -15,7 +15,7 @@ const Dialog = ({
   }, []);
 
   useEffect(() => {
-    if (typewriterText === text) {
+    if (typewriterText == text) {
       setTimeout(() => {
         setDialogDone(true);
       }, 2000);

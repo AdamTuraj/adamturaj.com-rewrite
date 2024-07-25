@@ -6,13 +6,7 @@ Command: npx gltfjsx@6.4.1 PortfolioScene.glb --types
 import React, { Dispatch, SetStateAction, useEffect, useRef } from "react";
 
 import * as THREE from "three";
-import {
-  Plane,
-  useGLTF,
-  useScroll,
-  useTexture,
-  useVideoTexture,
-} from "@react-three/drei";
+import { Plane, useGLTF, useTexture, useVideoTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { GLTF } from "three-stdlib";
 
@@ -268,21 +262,31 @@ const Scene = ({
   ) as GLTFResult;
 
   const bootupTexture = useTexture("/textures/bootupScreen.jpg");
+  const schematicTexture = useTexture("/textures/kicadSchematic.jpg");
+  const schematicFinalTexture = useTexture("/textures/kicadSchematicFinal.jpg");
+  const pcbTexture = useTexture("/textures/kicadPCB.jpg");
 
   const oscilloscopeTexture = useTexture("/textures/oscilloscopeScreen.jpg");
 
   useFrame(() => {
-    if (propRef.current.length === 0) return;
+    if (propRef.current.length == 0) return;
 
-    propRef.current.forEach((prop) => {
-      prop.rotation.y += propSpeed;
+    propRef.current.forEach((prop, i) => {
+      // Drone's props spin two CW and two CCW
+      console.log(i);
+      if (i == 3) {
+        // Prop #3 (i=2) is already rotating the other way. Therefore I only need to spin prop 4 in the other direction
+        prop.rotation.y += propSpeed;
+      } else {
+        prop.rotation.y -= propSpeed;
+      }
     });
   });
 
   useEffect(() => {
     if (!computerScreenRef.current) return;
 
-    if (section === 1) {
+    if (section == 1) {
       interval = setInterval(() => {
         if (propSpeed < 0.05) {
           clearInterval(interval);
@@ -299,13 +303,25 @@ const Scene = ({
       setDialog(
         "It's about time you started. I was losing faith in you. Anyways welcome to my portfolio. My name is Adam Turaj. Lets boot up Kicad and get going!"
       );
-    } else if (section === 2) {
+    } else if (section == 2) {
       setDialog("");
       setTimeout(() => {
         setDialog(
           "Give it a few more moments to start up and we'll be ready to go...and perfect. Welcome to Kicad, this is where I do my designing. Here I am working on a simple microcontroller. Lets fast forward in time slightly and...tada. Here is the final schematic!"
         );
-      }, 500)
+
+        setTimeout(() => {
+          if (computerScreenRef.current) {
+            computerScreenRef.current.map = schematicTexture;
+          }
+
+          setTimeout(() => {
+            if (computerScreenRef.current) {
+              computerScreenRef.current.map = schematicFinalTexture;
+            }
+          }, 13000);
+        }, 5700);
+      }, 500);
     }
   }, [section, computerScreenRef]);
 
