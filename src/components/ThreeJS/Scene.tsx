@@ -261,10 +261,10 @@ const Scene = ({
     "/models/PortfolioScene.glb"
   ) as GLTFResult;
 
-  const bootupTexture = useTexture("/textures/bootupScreen.jpg");
-  const schematicTexture = useTexture("/textures/kicadSchematic.jpg");
+  const loginStaticTexture = useTexture("/textures/loginScreen.jpg");
+  const loginVideoTexture = useVideoTexture("/textures/loginScreen.mp4");
+  const schematicTexture = useVideoTexture("/textures/kicadSchematic.mp4");
   const schematicFinalTexture = useTexture("/textures/kicadSchematicFinal.jpg");
-  const pcbTexture = useTexture("/textures/kicadPCB.jpg");
 
   const oscilloscopeTexture = useTexture("/textures/oscilloscopeScreen.jpg");
 
@@ -297,17 +297,17 @@ const Scene = ({
         }
       }, 1000);
 
-      computerScreenRef.current.color = new THREE.Color("#fff");
-
-      computerScreenRef.current.map = bootupTexture;
       setDialog(
-        "It's about time you started. I was losing faith in you. Anyways welcome to my portfolio. My name is Adam Turaj. Lets boot up Kicad and get going!"
+        "It's about time you started. I was losing faith in you. Anyways welcome to my portfolio. My name is Adam Turaj. Lets login, boot up Kicad and get going!"
       );
     } else if (section == 2) {
       setDialog("");
+      if (computerScreenRef.current) {
+        computerScreenRef.current.map = loginVideoTexture;
+      }
       setTimeout(() => {
         setDialog(
-          "Give it a few more moments to start up and we'll be ready to go...and perfect. Welcome to Kicad, this is where I do my designing. Here I am working on a simple microcontroller. Lets fast forward in time slightly and...tada. Here is the final schematic!"
+          "Give me one second to login into my computer and...Welcome to Kicad, this is where I do my designing. Here I am working on a simple microcontroller. Lets fast forward in time slightly and...tada. Here is the final schematic!"
         );
 
         setTimeout(() => {
@@ -320,7 +320,7 @@ const Scene = ({
               computerScreenRef.current.map = schematicFinalTexture;
             }
           }, 13000);
-        }, 5700);
+        }, 4400);
       }, 500);
     }
   }, [section, computerScreenRef]);
@@ -739,7 +739,7 @@ const Scene = ({
             scale={[0.3, 0.18, 1]}
           >
             <meshBasicMaterial
-              color="#000"
+              map={loginStaticTexture}
               toneMapped={false}
               ref={computerScreenRef}
             />
