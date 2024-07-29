@@ -262,18 +262,22 @@ const Scene = ({
   ) as GLTFResult;
 
   const loginStaticTexture = useTexture("/textures/loginScreen.jpg");
-  const loginVideoTexture = useVideoTexture("/textures/loginScreen.mp4");
+  const loginVideoTexture = useVideoTexture("/textures/loginScreen.mp4", {
+    loop: false,
+  });
   const schematicTexture = useVideoTexture("/textures/kicadSchematic.mp4");
   const schematicFinalTexture = useTexture("/textures/kicadSchematicFinal.jpg");
 
   const oscilloscopeTexture = useTexture("/textures/oscilloscopeScreen.jpg");
+
+  loginStaticTexture.magFilter = THREE.NearestFilter;
+  oscilloscopeTexture.magFilter = THREE.NearestFilter;
 
   useFrame(() => {
     if (propRef.current.length == 0) return;
 
     propRef.current.forEach((prop, i) => {
       // Drone's props spin two CW and two CCW
-      console.log(i);
       if (i == 3) {
         // Prop #3 (i=2) is already rotating the other way. Therefore I only need to spin prop 4 in the other direction
         prop.rotation.y += propSpeed;
