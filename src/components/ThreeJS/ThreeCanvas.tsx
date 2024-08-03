@@ -34,7 +34,6 @@ const ThreeCanvas = () => {
 
   const [section, setSection] = useState(0);
   const [dialogDone, setDialogDone] = useState(true);
-  const [forceNoClick, setForceNoClick] = useState(false);
 
   const onClick = () => {
     setTimeout(() => {
@@ -50,9 +49,7 @@ const ThreeCanvas = () => {
       <Canvas
         shadows
         style={{ width: "100vw", height: "100vh" }}
-        className={
-          dialogDone && !forceNoClick ? "cursor-pointer" : "cursor-none"
-        }
+        className={dialogDone ? "cursor-pointer" : "cursor-none"}
         dpr={dpr}
         onClick={onClick}
       >

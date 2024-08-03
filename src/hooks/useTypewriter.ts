@@ -17,7 +17,9 @@ const Typewriter = (text: string, delay: number) => {
             typeLetter();
           }
         },
-        text.charAt(index - 1) == "." ? randomDelay * 4 : randomDelay
+        text.charAt(index - 1) == "." || text.charAt(index - 1) == "!"
+          ? randomDelay * 4
+          : randomDelay
       );
     };
 
@@ -25,6 +27,11 @@ const Typewriter = (text: string, delay: number) => {
 
     return () => clearTimeout(timeout);
   }, [text, delay, index]);
+
+  // Otherwise it doesn't fully restart
+  useEffect(() => {
+    setIndex(0);
+  }, [text]);
 
   return text.slice(0, index);
 };

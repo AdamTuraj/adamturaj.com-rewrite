@@ -279,7 +279,7 @@ const Scene = ({
     muted: true,
     start: video == 2,
   });
-  const schematicFinalTexture = useTexture("/textures/kicadSchematicFinal.jpg");
+  const pcbMenuTexture = useTexture("/textures/kicadPCBMenu.jpg");
 
   const oscilloscopeTexture = useTexture("/textures/oscilloscopeScreen.jpg");
 
@@ -322,8 +322,9 @@ const Scene = ({
       setCurrentVideo(1);
 
       setTimeout(() => {
+        // TODO: Split this up
         setDialog(
-          "Give me one second to login into my computer and...Welcome to Kicad, this is where I do my designing. Here I am working on a simple microcontroller. Lets speed this up a bit..."
+          "Give me one second to login to my computer and...Welcome to Kicad, this is where I do my designing! Here I am working on a simple microcontroller. Lets speed this up a bit...Here we go, the final schematic! Now the important time, actually design the PCB! Click anywhere to skip to this."
         );
 
         setTimeout(() => {
@@ -331,15 +332,13 @@ const Scene = ({
             computerScreenRef.current.map = schematicTexture;
             setCurrentVideo(2);
           }
-
-          setTimeout(() => {
-            if (computerScreenRef.current) {
-              computerScreenRef.current.map = schematicFinalTexture;
-              setCurrentVideo(3);
-            }
-          }, 13000);
         }, 4400);
       }, 100);
+    } else if (section == 3) {
+      setDialog(
+        "Here is the final PCB design. Click it to ship it off the manufacturer and solder the components on."
+      );
+      computerScreenRef.current.map = pcbMenuTexture;
     }
   }, [section, computerScreenRef]);
 
